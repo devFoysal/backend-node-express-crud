@@ -1,11 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define("product", {
+    image: {
+      type: DataTypes.STRING,
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
+      allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
@@ -13,8 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     published: {
       type: DataTypes.BOOLEAN,
     },
+    status: {
+      type: DataTypes.ENUM("active", "inactive"),
+    },
   });
 
   return Product;
-  
 };

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const routes = require("./api/v1/routes");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -15,6 +16,7 @@ const options = {
 app.use(cors(options));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 app.use(routes);
 
 
