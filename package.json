@@ -1,0 +1,31 @@
+{
+  "name": "nodejs-crud",
+  "version": "1.0.0",
+  "description": "This is nodejs CRUD application",
+  "main": "src",
+  "scripts": {
+    "dev": "nodemon src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devFoysal/nodejs-crud.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devFoysal/nodejs-crud/issues"
+  },
+  "homepage": "https://github.com/devFoysal/nodejs-crud#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongodb": "^4.9.1",
+    "mysql2": "^2.3.3",
+    "pug": "^3.0.2",
+    "sequelize": "^6.25.1"
+  }
+}
