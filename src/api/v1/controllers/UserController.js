@@ -1,7 +1,7 @@
 const db = require("../models");
-const multer  = require('multer')
-const path = require('path')
-const upload = multer({ dest: path.dirname('public/uploads/users/') })
+const multer = require("multer");
+const path = require("path");
+const upload = multer({ dest: path.dirname("public/uploads/users/") });
 
 const User = db.users;
 // const Review = db.reviews;
@@ -10,6 +10,7 @@ const addNewUser = async (req, res) => {
   const data = {
     image: upload.single(req?.body?.image),
     fullName: req?.body?.fullName,
+    username: req?.body?.username,
     email: req?.body?.email,
     contactNumber: req?.body?.contactNumber,
     password: req?.body?.password,
@@ -31,7 +32,6 @@ const getAllUsers = async (req, res) => {
     console.log(`Error: ${error}`);
   }
 };
-
 
 const getUser = async (req, res) => {
   try {

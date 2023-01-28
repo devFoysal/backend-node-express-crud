@@ -5,19 +5,26 @@ module.exports = (sequelize, DataTypes) => {
     },
     fullName: {
       type: DataTypes.STRING,
+    },
+    username: {
+      type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      unique: true
     },
     contactNumber: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM("active", "inactive"),
+      defaultValue: "active",
     },
   });
 

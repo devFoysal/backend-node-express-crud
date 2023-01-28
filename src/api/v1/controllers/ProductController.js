@@ -13,8 +13,9 @@ const addNewProduct = async (req, res) => {
 
   try {
     const product = await Product.create(data);
-    res.status(200).send(`Created successfully\n${JSON.stringify(product)}`);
+    res.status(201).json({ message: "Product added successfully", product });
   } catch (error) {
+    res.status(400).json({ message: "Bad request", error });
     console.log(`Error: ${error}`);
   }
 };
@@ -49,10 +50,16 @@ const getProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
+    const data = {
+      title: req?.body?.title,
+      price: req?.body?.price,
+      description: req?.body?.description,
+    };
     const _id = req?.params?.id;
-    await Product.update(req?.body, { where: { id: _id } });
-    res.status(200).send(`Update successfully`);
+    await Product.update(data, { where: { id: _id } });
+    res.status(201).json({ message: "Product updated successfully" });
   } catch (error) {
+    res.status(400).json({ message: "Bad request", error });
     console.log(`Error: ${error}`);
   }
 };
@@ -60,9 +67,11 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const _id = req?.params?.id;
+
     await Product.destroy({ where: { id: _id } });
-    res.status(200).send(`Delete successfully`);
+    res.status(200).json({ message: `Delete successfully` });
   } catch (error) {
+    res.status(404).json({ message: `Product not found`, error: error });
     console.log(`Error: ${error}`);
   }
 };

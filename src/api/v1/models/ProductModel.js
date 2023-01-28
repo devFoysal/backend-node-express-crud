@@ -14,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT,
     },
-    published: {
-      type: DataTypes.BOOLEAN,
-    },
     status: {
       type: DataTypes.ENUM("active", "inactive"),
     },
