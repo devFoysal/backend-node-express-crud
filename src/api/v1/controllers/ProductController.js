@@ -8,7 +8,6 @@ const addNewProduct = async (req, res) => {
     title: req?.body?.title,
     price: req?.body?.price,
     description: req?.body?.description,
-    published: req?.body?.published ? req?.body?.published : false,
   };
 
   try {
@@ -21,9 +20,15 @@ const addNewProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
+  const limit = 5;
+  const offset = (req.query.page - 1) * limit;
   try {
-    const products = await Product.findAll({});
-    res.status(200).send(products);
+    const products = await Product.findAndCountAll({
+      offset: offset,
+      limit: limit,
+      // order: [["date", "ASC"]],
+    });
+    res.status(200).json(products);
   } catch (error) {
     console.log(`Error: ${error}`);
   }
@@ -76,6 +81,18 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const deleteMultipleProduct = async (req, res) => {
+  try {
+    await Product.destroy({ where: { id: req?.body?.ids } });
+    res
+      .status(200)
+      .json({ message: `${req?.body?.ids?.length} Delete successfully` });
+  } catch (error) {
+    res.status(404).json({ message: `Product not found`, error: error });
+    console.log(`Error: ${error}`);
+  }
+};
+
 module.exports = {
   addNewProduct,
   getAllProducts,
@@ -83,4 +100,5 @@ module.exports = {
   getProduct,
   updateProduct,
   deleteProduct,
+  deleteMultipleProduct,
 };

@@ -24,4 +24,8 @@ productRouter
   })
   .delete(productController?.deleteProduct);
 
+productRouter
+  .route("/multiple/delete", auth)
+  .delete(productController?.deleteMultipleProduct);
+
 module.exports = productRouter;
