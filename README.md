@@ -1,14 +1,9 @@
 # Backend
 #### Expressjs, MySQL and Sequelize
 
-├── public
-    ├──uploads
-        ├──products                    # Product image path
-├── src
-    ├──config
-        ├──DatabaseConfig.js           # Config database here
-├── src
-    ├──.env                            # JWT Secret
+public > uploads > products             # Product image path
+src > config > DatabaseConfig.js        # Config database here
+src > .env                              # JWT Secret
 
 ### `git pull`
 
