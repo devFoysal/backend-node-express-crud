@@ -23,8 +23,7 @@ const signUp = async (req, res) => {
 
     const userData = {
       id: user?.id,
-      fullName: user?.fullName,
-      email: user?.email,
+      username: user?.username,
     };
     const token = jwt.sign({ userData }, process.env.JWT_SECRET, {
       expiresIn: "1d",
@@ -58,8 +57,7 @@ const signIn = async (req, res) => {
 
     const userData = {
       id: user?.id,
-      fullName: user?.fullName,
-      email: user?.email,
+      username: user?.username,
     };
     const token = jwt.sign({ userData }, process.env.JWT_SECRET, {
       expiresIn: "1d",
@@ -80,6 +78,8 @@ const signIn = async (req, res) => {
 const signOut = async (req, res) => {
   try {
     res?.clearCookie("token");
+    res?.clearCookie("isAuthenticated");
+    res?.clearCookie("user");
     res.status(200).json({ status: true, message: "Sign Out successfully" });
   } catch (error) {
     console.log(`Error: ${error}`);
