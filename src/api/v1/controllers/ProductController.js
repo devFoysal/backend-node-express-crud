@@ -1,17 +1,32 @@
 const db = require("../models");
+const path = require("path");
 
 const Product = db.products;
 // const Review = db.reviews;
 
 const addNewProduct = async (req, res) => {
-  const data = {
-    title: req?.body?.title,
-    price: req?.body?.price,
-    description: req?.body?.description,
-  };
-
   try {
+    let newImageName, fileName, uploadPath, originalExtension;
+
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res?.status(400)?.json({ message: "No files were uploaded." });
+    }
+
+    fileName = req.files?.image;
+    originalExtension = req.files?.image?.mimetype?.split("/")[1];
+    newImageName = `${Date.now()}.${originalExtension}`;
+    uploadPath = `${path.resolve("./public/uploads/products")}/${newImageName}`;
+    fileName.mv(uploadPath);
+
+    const data = {
+      title: req?.body?.title,
+      image: newImageName,
+      price: parseFloat(req?.body?.price),
+      description: req?.body?.description,
+    };
+
     const product = await Product.create(data);
+
     res.status(201).json({ message: "Product added successfully", product });
   } catch (error) {
     res.status(400).json({ message: "Bad request", error });
@@ -20,7 +35,7 @@ const addNewProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const limit = 5;
+  const limit = 20;
   const offset = (req.query.page - 1) * limit;
   try {
     const products = await Product.findAndCountAll({

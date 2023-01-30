@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const routes = require("./api/v1/routes");
 const cookieParser = require("cookie-parser");
+const fileUpload = require('express-fileupload');
 
 require("dotenv").config();
 
@@ -19,9 +20,11 @@ const options = {
 // Middleware
 app.use(cors(options));
 app.use(cookieParser());
+app.use(fileUpload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use('/products', express.static('public/uploads/products'));
 app.use(routes);
 
 app.listen(PORT, () => {

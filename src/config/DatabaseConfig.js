@@ -1,8 +1,8 @@
 module.exports = {
     DB_HOST: 'localhost',
-    DB_USER: 'root',
-    DB_PASSWORD: '',
-    DB_NAME: 'react_node_crud',
+    DB_USER: 'foysalmahmud',
+    DB_PASSWORD: 'password',
+    DB_NAME: 'crud',
     dialect: 'mysql',
     pool:{
         min:0,

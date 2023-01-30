@@ -14,11 +14,7 @@ const signUp = async (req, res) => {
   const hashPassword = await bcrypt.hash(req?.body?.password, salt);
 
   const data = {
-    // image: upload.single(req?.body?.image),
-    fullName: req?.body?.fullName,
     username: req?.body?.username,
-    email: req?.body?.email,
-    contactNumber: req?.body?.contactNumber,
     password: hashPassword,
   };
 
